@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>إتمام الطلب</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h1>إتمام الطلب ☕</h1>
+
+<form id="orderForm">
+
+<label>الاسم</label><br>
+<input type="text" id="name" required><br><br>
+
+<label>رقم الهاتف</label><br>
+<input type="tel" id="phone" required><br><br>
+
+<label>العنوان</label><br>
+<input type="text" id="address" required><br><br>
+
+<label>طريقة الدفع</label><br>
+
+<select id="payment">
+<option>الدفع عند الاستلام</option>
+<option>فودافون كاش</option>
+<option>بطاقة بنكية</option>
+</select>
+
+<br><br>
+
+<button type="submit">
+تأكيد الطلب
+</button>
+
+</form>
+
+<script src="script.js"></script>
+
+</body>
+</html>
