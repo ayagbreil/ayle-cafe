@@ -1,16 +1,13 @@
-// رقم الواتساب الخاص بالكافيه (غيريه لرقمك بفرمتة دولية بدون +)
 const cafeWhatsAppNumber = "201515309139"; 
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let total = 0;
 let currentUser = JSON.parse(localStorage.getItem("currentUser")) || null;
 
-// تشغيل الوظائف عند تحميل الصفحة
 document.addEventListener("DOMContentLoaded", () => {
     updateCartUI();
     checkAuthStatus();
 
-    // إعداد زر الوضع الليلي
     const darkModeBtn = document.getElementById("darkModeBtn");
     if (localStorage.getItem("theme") === "dark") {
         document.body.classList.add("dark");
@@ -31,23 +28,21 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// إدارة حالة تسجيل الدخول
+// تحديث حالة زر الدخول/الحساب
 function checkAuthStatus() {
     const authBtn = document.getElementById("authBtn");
     if (authBtn) {
         if (currentUser) {
-            authBtn.textContent = `مرحباً، ${currentUser.name.split(" ")[0]} (خروج)`;
-            authBtn.href = "#";
-            authBtn.onclick = logout;
+            authBtn.textContent = `👤 ${currentUser.name.split(" ")[0]}`;
+            authBtn.href = "profile.html";
         } else {
             authBtn.textContent = "دخول / تسجيل";
             authBtn.href = "login.html";
-            authBtn.onclick = null;
         }
     }
 }
 
-// تسجيل الدخول
+// تسجيل الدخول بدون alerts
 function handleLogin(e) {
     e.preventDefault();
     const email = document.getElementById("loginEmail").value;
@@ -59,14 +54,13 @@ function handleLogin(e) {
     if (user) {
         currentUser = user;
         localStorage.setItem("currentUser", JSON.stringify(currentUser));
-        alert(`تم تسجيل الدخول بنجاح! أهلاً بك يا ${user.name}`);
-        window.location.href = "index.html";
+        window.location.href = "profile.html";
     } else {
         alert("البريد الإلكتروني أو كلمة المرور غير صحيحة!");
     }
 }
 
-// إنشاء حساب جديد
+// تسجيل حساب جديد
 function handleRegister(e) {
     e.preventDefault();
     const name = document.getElementById("regName").value;
@@ -89,19 +83,17 @@ function handleRegister(e) {
     currentUser = newUser;
     localStorage.setItem("currentUser", JSON.stringify(currentUser));
 
-    alert(`تم إنشاء الحساب بنجاح! أهلاً بك يا ${name}`);
-    window.location.href = "index.html";
+    window.location.href = "profile.html";
 }
 
 // تسجيل الخروج
 function logout() {
     localStorage.removeItem("currentUser");
     currentUser = null;
-    alert("تم تسجيل الخروج بنجاح.");
-    location.reload();
+    window.location.href = "login.html";
 }
 
-// تصفية المنيو حسب القسم
+// فلترة المنيو
 function filterMenu(category) {
     const cards = document.querySelectorAll(".card");
     const buttons = document.querySelectorAll(".cat-btn");
@@ -118,7 +110,7 @@ function filterMenu(category) {
     });
 }
 
-// إضافة منتج للسلة
+// إضافة منتج للسلة (تحديث العداد بسلسونة بدون alert)
 function addToCart(name, price) {
     const existingItem = cart.find(item => item.name === name);
     if (existingItem) {
@@ -128,18 +120,25 @@ function addToCart(name, price) {
     }
     localStorage.setItem("cart", JSON.stringify(cart));
     updateCartUI();
-    alert(`تمت إضافة ${name} إلى السلة 🛒`);
 }
 
-// تحديث واجهة السلة
+// تحديث بيانات السلة
 function updateCartUI() {
     const cartList = document.getElementById("cart-list");
     const totalPriceEl = document.getElementById("total-price");
+    const cartCountEl = document.getElementById("cartCount");
+
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    if (cartCountEl) cartCountEl.textContent = totalItems;
 
     if (!cartList || !totalPriceEl) return;
 
     cartList.innerHTML = "";
     total = 0;
+
+    if (cart.length === 0) {
+        cartList.innerHTML = "<p style='text-align:center;'>السلة فارغة حالياً ☕</p>";
+    }
 
     cart.forEach((item, index) => {
         const itemTotal = item.price * item.quantity;
@@ -158,25 +157,19 @@ function updateCartUI() {
     totalPriceEl.textContent = total;
 }
 
-// حذف عنصر من السلة
 function removeFromCart(index) {
     cart.splice(index, 1);
     localStorage.setItem("cart", JSON.stringify(cart));
     updateCartUI();
 }
 
-// إتمام الطلب عبر الواتساب
 function checkoutWhatsApp() {
     if (!currentUser) {
-        alert("من فضلك قم بتسجيل الدخول أولاً لإرسال الطلب!");
         window.location.href = "login.html";
         return;
     }
 
-    if (cart.length === 0) {
-        alert("السلة فارغة، أضف بعض المنتجات أولاً!");
-        return;
-    }
+    if (cart.length === 0) return;
 
     let orderText = `*طلب جديد من موقع Aylé Café ☕*\n\n`;
     orderText += `👤 *العميل:* ${currentUser.name}\n`;
@@ -194,4 +187,50 @@ function checkoutWhatsApp() {
     const whatsappURL = `https://wa.me/${cafeWhatsAppNumber}?text=${encodedText}`;
 
     window.open(whatsappURL, "_blank");
+}// الانتقال لصفحة الشراء
+function goToCheckout() {
+    if (!currentUser) {
+        window.location.href = "login.html";
+        return;
+    }
+    if (cart.length === 0) {
+        alert("السلة فارغة حالياً!");
+        return;
+    }
+    window.location.href = "checkout.html";
+}
+
+// إرسال الطلب النهائي مع طريقة الدفع للواتساب
+function submitCheckoutOrder(e) {
+    e.preventDefault();
+
+    if (cart.length === 0) return;
+
+    const name = document.getElementById("checkoutName").value;
+    const phone = document.getElementById("checkoutPhone").value;
+    const address = document.getElementById("checkoutAddress").value;
+    const payment = document.getElementById("checkoutPayment").value;
+
+    let orderText = `*طلب جديد من موقع Aylé Café ☕*\n\n`;
+    orderText += `👤 *العميل:* ${name}\n`;
+    orderText += `📞 *الهاتف:* ${phone}\n`;
+    orderText += `📍 *العنوان:* ${address}\n`;
+    orderText += `💳 *طريقة الدفع:* ${payment}\n\n`;
+    orderText += `📋 *تفاصيل الطلب:*\n`;
+
+    cart.forEach(item => {
+        orderText += `- ${item.name} (عدد: ${item.quantity}) = ${item.price * item.quantity} ج.م\n`;
+    });
+
+    orderText += `\n💵 *الإجمالي النهائي:* ${total} جنيه مصري`;
+
+    // مسح السلة بعد إتمام الطلب
+    localStorage.removeItem("cart");
+    cart = [];
+
+    const encodedText = encodeURIComponent(orderText);
+    const whatsappURL = `https://wa.me/${cafeWhatsAppNumber}?text=${encodedText}`;
+
+    window.open(whatsappURL, "_blank");
+    window.location.href = "index.html";
 }

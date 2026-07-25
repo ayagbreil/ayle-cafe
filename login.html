@@ -12,22 +12,22 @@
     <header class="dark-nav">
         <nav class="navbar">
             <h2 class="logo">Aylé Café</h2>
-            <ul class="nav-links">
-                <li><a href="index.html">الرئيسية</a></li>
-                <li><a href="menu.html">المنيو</a></li>
-                <li><a href="about.html">من نحن</a></li>
-                <li><a href="contact.html">تواصل معنا</a></li>
-            </ul>
             <div class="nav-actions">
+                <a href="cart.html" class="btn-cart">🛒 السلة <span id="cartCount">0</span></a>
                 <a href="login.html" id="authBtn" class="btn-auth active">دخول / تسجيل</a>
                 <button id="darkModeBtn">🌙</button>
             </div>
         </nav>
+        <ul class="nav-links bottom-nav">
+            <li><a href="index.html">الرئيسية</a></li>
+            <li><a href="menu.html">المنيو</a></li>
+            <li><a href="about.html">من نحن</a></li>
+            <li><a href="contact.html">تواصل معنا</a></li>
+        </ul>
     </header>
 
     <section class="auth-container">
         <div class="auth-card">
-            
             <div class="auth-tabs">
                 <button id="tabLogin" class="tab-btn active" onclick="switchTab('login')">تسجيل الدخول</button>
                 <button id="tabRegister" class="tab-btn" onclick="switchTab('register')">إنشاء حساب جديد</button>
@@ -63,7 +63,7 @@
 
                 <div class="input-group">
                     <label>العنوان بالتفصيل (للتوصيل)</label>
-                    <input type="text" id="regAddress" placeholder="المدينة، الشارع، رقم العمارة أو الشقة" required>
+                    <input type="text" id="regAddress" placeholder="المدينة، الشارع، رقم العمارة" required>
                 </div>
 
                 <div class="input-group">
@@ -78,7 +78,6 @@
 
                 <button type="submit" class="btn btn-block">إنشاء الحساب</button>
             </form>
-
         </div>
     </section>
 

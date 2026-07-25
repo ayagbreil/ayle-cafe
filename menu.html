@@ -12,17 +12,18 @@
     <header class="dark-nav">
         <nav class="navbar">
             <h2 class="logo">Aylé Café</h2>
-            <ul class="nav-links">
-                <li><a href="index.html">الرئيسية</a></li>
-                <li><a href="menu.html" class="active">المنيو</a></li>
-                <li><a href="about.html">من نحن</a></li>
-                <li><a href="contact.html">تواصل معنا</a></li>
-            </ul>
             <div class="nav-actions">
+                <a href="cart.html" class="btn-cart">🛒 السلة <span id="cartCount">0</span></a>
                 <a href="login.html" id="authBtn" class="btn-auth">دخول / تسجيل</a>
                 <button id="darkModeBtn">🌙</button>
             </div>
         </nav>
+        <ul class="nav-links bottom-nav">
+            <li><a href="index.html">الرئيسية</a></li>
+            <li><a href="menu.html" class="active">المنيو</a></li>
+            <li><a href="about.html">من نحن</a></li>
+            <li><a href="contact.html">تواصل معنا</a></li>
+        </ul>
     </header>
 
     <section class="featured">
@@ -72,16 +73,6 @@
                 <span class="price">40 جنيه</span>
                 <button class="btn add-to-cart" onclick="addToCart('كرواسون', 40)">أضف للسلة 🛒</button>
             </div>
-        </div>
-    </section>
-
-    <!-- Cart Section -->
-    <section class="cart-section">
-        <h2>سلة المشتريات 🛒</h2>
-        <ul id="cart-list"></ul>
-        <div class="cart-total">
-            <h3>الإجمالي: <span id="total-price">0</span> جنيه</h3>
-            <button class="btn" onclick="checkoutWhatsApp()">إتمام الطلب عبر WhatsApp 💬</button>
         </div>
     </section>
 

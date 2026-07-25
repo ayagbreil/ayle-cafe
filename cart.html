@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aylé Café - من نحن</title>
+    <title>Aylé Café - سلة المشتريات</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -13,7 +13,7 @@
         <nav class="navbar">
             <h2 class="logo">Aylé Café</h2>
             <div class="nav-actions">
-                <a href="cart.html" class="btn-cart">🛒 السلة <span id="cartCount">0</span></a>
+                <a href="cart.html" class="btn-cart active">🛒 السلة <span id="cartCount">0</span></a>
                 <a href="login.html" id="authBtn" class="btn-auth">دخول / تسجيل</a>
                 <button id="darkModeBtn">🌙</button>
             </div>
@@ -21,17 +21,17 @@
         <ul class="nav-links bottom-nav">
             <li><a href="index.html">الرئيسية</a></li>
             <li><a href="menu.html">المنيو</a></li>
-            <li><a href="about.html" class="active">من نحن</a></li>
+            <li><a href="about.html">من نحن</a></li>
             <li><a href="contact.html">تواصل معنا</a></li>
         </ul>
     </header>
 
-    <section class="about-page">
-        <div class="about-text">
-            <h2>قصتنا في Aylé Café ✨</h2>
-            <p>بدأ مقهى أيلا بحلم بسيط. كان هدفنا نعمل مكان هادئ يجمع الناس على فنجان قهوة بطعم مميز، ويكون كل زائر حاسس إنه وسط أهله.</p>
-            <p>نحن نهتم بأدق التفاصيل من اختيار أجود حبوب القهوة إلى تقديم خدمة تليق بضيوفنا الكرام.</p>
-        </div>
+    <section class="cart-section page-cart">
+        <h2>سلة المشتريات 🛒</h2>
+        <ul id="cart-list"></ul>
+        <div class="cart-total">
+            <h3>الإجمالي: <span id="total-price">0</span> جنيه</h3>
+<button class="btn" onclick="goToCheckout()">متابعة الشراء وإتمام الطلب 💳</button>        </div>
     </section>
 
     <footer>

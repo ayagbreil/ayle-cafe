@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aylé Café - حسابي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="page-body">
+
+    <header class="dark-nav">
+        <nav class="navbar">
+            <h2 class="logo">Aylé Café</h2>
+            <div class="nav-actions">
+                <a href="cart.html" class="btn-cart">🛒 السلة <span id="cartCount">0</span></a>
+                <a href="profile.html" id="authBtn" class="btn-auth active">حسابي</a>
+                <button id="darkModeBtn">🌙</button>
+            </div>
+        </nav>
+        <ul class="nav-links bottom-nav">
+            <li><a href="index.html">الرئيسية</a></li>
+            <li><a href="menu.html">المنيو</a></li>
+            <li><a href="about.html">من نحن</a></li>
+            <li><a href="contact.html">تواصل معنا</a></li>
+        </ul>
+    </header>
+
+    <section class="auth-container">
+        <div class="auth-card profile-card">
+            <h2>بيانات حسابي 👤</h2>
+            <hr class="divider">
+            <div class="profile-info">
+                <p><strong>الاسم:</strong> <span id="profName">-</span></p>
+                <p><strong>رقم الهاتف:</strong> <span id="profPhone">-</span></p>
+                <p><strong>العنوان:</strong> <span id="profAddress">-</span></p>
+                <p><strong>البريد الإلكتروني:</strong> <span id="profEmail">-</span></p>
+            </div>
+            <button class="btn btn-block btn-logout" onclick="logout()">تسجيل الخروج 🚪</button>
+        </div>
+    </section>
+
+    <footer>
+        <h2>Aylé Café</h2>
+        <p>© 2026 Aylé Café. All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            if (!currentUser) {
+                window.location.href = "login.html";
+                return;
+            }
+            document.getElementById("profName").textContent = currentUser.name;
+            document.getElementById("profPhone").textContent = currentUser.phone || "غير محدد";
+            document.getElementById("profAddress").textContent = currentUser.address || "غير محدد";
+            document.getElementById("profEmail").textContent = currentUser.email;
+        });
+    </script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-<!D<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -9,20 +9,21 @@
 </head>
 <body>
 
-    <header>
+    <header class="dark-nav">
         <nav class="navbar">
             <h2 class="logo">Aylé Café</h2>
-            <ul class="nav-links">
-                <li><a href="index.html" class="active">الرئيسية</a></li>
-                <li><a href="menu.html">المنيو</a></li>
-                <li><a href="about.html">من نحن</a></li>
-                <li><a href="contact.html">تواصل معنا</a></li>
-            </ul>
             <div class="nav-actions">
+                <a href="cart.html" class="btn-cart">🛒 السلة <span id="cartCount">0</span></a>
                 <a href="login.html" id="authBtn" class="btn-auth">دخول / تسجيل</a>
                 <button id="darkModeBtn">🌙</button>
             </div>
         </nav>
+        <ul class="nav-links bottom-nav">
+            <li><a href="index.html" class="active">الرئيسية</a></li>
+            <li><a href="menu.html">المنيو</a></li>
+            <li><a href="about.html">من نحن</a></li>
+            <li><a href="contact.html">تواصل معنا</a></li>
+        </ul>
     </header>
 
     <!-- Hero Section -->

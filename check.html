@@ -1,44 +1,81 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>إتمام الطلب</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aylé Café - إتمام الطلب</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
+<body class="page-body">
 
-<body>
+    <header class="dark-nav">
+        <nav class="navbar">
+            <h2 class="logo">Aylé Café</h2>
+            <div class="nav-actions">
+                <a href="cart.html" class="btn-cart">🛒 السلة <span id="cartCount">0</span></a>
+                <a href="login.html" id="authBtn" class="btn-auth">دخول / تسجيل</a>
+                <button id="darkModeBtn">🌙</button>
+            </div>
+        </nav>
+        <ul class="nav-links bottom-nav">
+            <li><a href="index.html">الرئيسية</a></li>
+            <li><a href="menu.html">المنيو</a></li>
+            <li><a href="about.html">من نحم</a></li>
+            <li><a href="contact.html">تواصل معنا</a></li>
+        </ul>
+    </header>
 
-<h1>إتمام الطلب ☕</h1>
+    <section class="auth-container">
+        <div class="auth-card">
+            <h2>إتمام الطلب ☕</h2>
+            <p style="margin-bottom: 20px; font-size: 14px; color: #777;">تأكيد بيانات التوصيل وطريقة الدفع</p>
 
-<form id="orderForm">
+            <form id="orderForm" onsubmit="submitCheckoutOrder(event)">
+                <div class="input-group">
+                    <label>الاسم الكامل</label>
+                    <input type="text" id="checkoutName" required>
+                </div>
 
-<label>الاسم</label><br>
-<input type="text" id="name" required><br><br>
+                <div class="input-group">
+                    <label>رقم الهاتف</label>
+                    <input type="tel" id="checkoutPhone" required>
+                </div>
 
-<label>رقم الهاتف</label><br>
-<input type="tel" id="phone" required><br><br>
+                <div class="input-group">
+                    <label>عنوان التوصيل</label>
+                    <input type="text" id="checkoutAddress" required>
+                </div>
 
-<label>العنوان</label><br>
-<input type="text" id="address" required><br><br>
+                <div class="input-group">
+                    <label>طريقة الدفع</label>
+                    <select id="checkoutPayment" style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #ddd; outline: none; background: white;">
+                        <option value="الدفع عند الاستلام (كاش)">الدفع عند الاستلام (كاش)</option>
+                        <option value="فودافون كاش">فودافون كاش</option>
+                        <option value="بطاقة بنكية">بطاقة بنكية</option>
+                    </select>
+                </div>
 
-<label>طريقة الدفع</label><br>
+                <button type="submit" class="btn btn-block">تأكيد وإرسال عبر WhatsApp 💬</button>
+            </form>
+        </div>
+    </section>
 
-<select id="payment">
-<option>الدفع عند الاستلام</option>
-<option>فودافون كاش</option>
-<option>بطاقة بنكية</option>
-</select>
+    <footer>
+        <h2>Aylé Café</h2>
+        <p>© 2026 Aylé Café. All Rights Reserved.</p>
+    </footer>
 
-<br><br>
-
-<button type="submit">
-تأكيد الطلب
-</button>
-
-</form>
-
-<script src="script.js"></script>
-
+    <script src="script.js"></script>
+    <script>
+        // تعبئة البيانات تلقائياً لو العميل مسجل دخول
+        document.addEventListener("DOMContentLoaded", () => {
+            if (currentUser) {
+                document.getElementById("checkoutName").value = currentUser.name || "";
+                document.getElementById("checkoutPhone").value = currentUser.phone || "";
+                document.getElementById("checkoutAddress").value = currentUser.address || "";
+            }
+        });
+    </script>
 </body>
 </html>
